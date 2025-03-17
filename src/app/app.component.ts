@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [RouterModule], // Agregar RouterModule y NavbarComponent
+  imports: [RouterModule],
 })
 export class AppComponent {}
 
