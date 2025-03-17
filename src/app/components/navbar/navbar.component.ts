@@ -6,6 +6,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule], // Necesario para que routerLink funcione
 })
 export class NavbarComponent {}

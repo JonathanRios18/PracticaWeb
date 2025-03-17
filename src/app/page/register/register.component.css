@@ -1,0 +1,70 @@
+/* General Styling for the Register Container */
+.register-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: radial-gradient(circle, #1a1a1a 40%, #2f1f14);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+/* Title Styling */
+.title {
+  text-align: center;
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 2rem;
+  color: #d4af37;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 5px #000;
+}
+
+/* Compact Form Layout */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* Reduce el espacio entre filas */
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column; /* Cambiar a 'row' si quieres etiquetas a la izquierda */
+  gap: 0.4rem; /* Compacta el espacio entre la etiqueta y el campo */
+}
+
+label {
+  font-size: 0.9rem; /* Reduce el tamaño de las etiquetas */
+  color: #e5c59c;
+}
+
+input {
+  padding: 0.6rem;
+  font-size: 0.9rem; /* Reduce el tamaño del texto de los campos */
+  border-radius: 5px;
+  border: 1px solid #d4af37;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #f4e57a;
+  outline: none;
+}
+
+/* Button Styling */
+.btn-register {
+  padding: 0.6rem 1rem; /* Reduce el tamaño del botón */
+  font-size: 1rem; /* Reduce el tamaño del texto del botón */
+  background: #d4af37;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-register:hover {
+  background: #f4e57a;
+  transform: scale(1.03);
+}

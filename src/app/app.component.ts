@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component'; // Asegúrate de la ruta correcta
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  standalone: true,
-  imports: [NavbarComponent, RouterModule],
+  imports: [RouterModule, NavbarComponent], // Agregar RouterModule y NavbarComponent
 })
 export class AppComponent {}
+
