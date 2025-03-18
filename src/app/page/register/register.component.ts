@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { CommonModule } from '@angular/common'; // ✅ Importar CommonModule
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -8,7 +9,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [NavbarComponent, ReactiveFormsModule], // ✅ Agregamos ReactiveFormsModule
+  imports: [NavbarComponent, ReactiveFormsModule, CommonModule], // ✅ Agregamos ReactiveFormsModule
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
