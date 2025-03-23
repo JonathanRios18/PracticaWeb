@@ -14,17 +14,15 @@ export class AdminNavbarComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogout() {
-    this.authService.logout().subscribe({
-      next: () => {
-        console.log('Logout successful');
+    this.authService.logout().subscribe(
+      response => {
+        console.log('Logout successful', response);
+        this.authService.saveToken(''); // Esto asegura que el token sea eliminado.
         this.router.navigate(['/login']);
       },
-      error: (error) => {
-        console.error('Error al cerrar sesión', error);
-        alert('Tu sesión ha expirado. Inicia sesión de nuevo.');
-        localStorage.removeItem('token'); // Asegurarse de que el token se borre
-        this.router.navigate(['/login']);
-      },
-    });
+      error => {
+        console.error('Logout failed', error);
+      }
+    );
   }
 }

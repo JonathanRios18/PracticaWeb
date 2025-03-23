@@ -1,12 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { InventoryService, InventoryItem } from '../../services/inventory.service';
+import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 
 @Component({
   selector: 'app-inventories',
-  imports: [AdminNavbarComponent],
   templateUrl: './inventories.component.html',
-  styleUrl: './inventories.component.css'
+  styleUrls: ['./inventories.component.css'],
+  standalone: true,
+  imports: [AdminNavbarComponent, CommonModule],
 })
-export class InventoriesComponent {
+export class InventoriesComponent implements OnInit {
+  inventory: InventoryItem[] = [];
+  selectedItem: InventoryItem | null = null;
 
+  constructor(private inventoryService: InventoryService) {}
+
+  ngOnInit(): void {
+    this.loadInventory();
+  }
+
+  loadInventory(): void {
+    this.inventoryService.getInventory().subscribe(
+      (data) => {
+        this.inventory = data;
+      },
+      (error) => {
+        console.error('Error al cargar el inventario:', error);
+      }
+    );
+  }
 }

@@ -22,7 +22,7 @@ export const routes: Routes = [
   { path: 'skills', component: SkillsComponent, canActivate: [AuthGuard] },
   { path: 'inventories', component: InventoriesComponent, canActivate: [AuthGuard] },
   { path: 'enemies', component: EnemiesComponent, canActivate: [AuthGuard] },
-  { path: 'natios', component: NationsComponent, canActivate: [AuthGuard] },
+  { path: 'nations', component: NationsComponent, canActivate: [AuthGuard] },
   { path: 'quests', component: QuestsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService, Character } from '../../services/character.service';
-import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { CommonModule } from '@angular/common';
+import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 
 @Component({
   selector: 'app-characters',
@@ -27,17 +27,6 @@ export class CharactersComponent implements OnInit {
       },
       (error) => {
         console.error('Error al cargar los personajes:', error);
-      }
-    );
-  }
-
-  selectCharacter(id: number): void {
-    this.characterService.getCharacter(id).subscribe(
-      (data) => {
-        this.selectedCharacter = data;
-      },
-      (error) => {
-        console.error('Error al obtener los detalles del personaje:', error);
       }
     );
   }

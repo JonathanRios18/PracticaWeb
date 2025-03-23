@@ -1,3 +1,26 @@
 <app-admin-navbar></app-admin-navbar>
 
-<p>enemies works!</p>
+<div class="table-container">
+  <h2 class="table-title">Lista de Enemigos</h2>
+  <table >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Tipo</th>
+        <th>Nivel de Fuerza</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let enemy of enemies">
+        <td>{{ enemy.id }}</td>
+        <td>{{ enemy.name }}</td>
+        <td>{{ enemy.description }}</td>
+        <td>{{ enemy.type }}</td>
+        <td>{{ enemy.strength_level }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

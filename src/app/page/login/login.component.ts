@@ -27,7 +27,7 @@ export class LoginComponent {
         const token = response.token; // Asegúrate de que el backend devuelve el token en esta propiedad
         this.authService.saveToken(token);
         this.errorMessage = '';
-        this.router.navigate(['/characters']); // Redirige tras login exitoso
+        this.router.navigate(['/dashboard']); // Redirige tras login exitoso
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);

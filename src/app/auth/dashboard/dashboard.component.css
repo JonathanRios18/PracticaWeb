@@ -49,25 +49,87 @@
   transform: scale(1);
 }
 
-/* Styling for Logout Button */
-.btn-logout {
-  margin-top: 2rem;
-  padding: 0.8rem 1.2rem;
-  font-size: 1.2rem;
-  background: #b51717;
+/* General Table Styling */
+.table-container {
+  max-width: 90%;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: radial-gradient(circle, #1a1a1a 40%, #2f1f14);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  margin-top: 4rem; /* Adding margin to leave space for the button */
+}
+
+.table-title {
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 1.8rem;
+  color: #d4af37;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-shadow: 2px 2px 5px #000;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+}
+
+th, td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+thead th {
+  background: #2f2f2f;
+  color: #d4af37;
+  font-weight: bold;
+  border-bottom: 2px solid #d4af37;
+}
+
+tbody tr {
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+tbody tr:hover {
+  background: rgba(212, 175, 55, 0.2);
+  cursor: pointer;
+}
+
+tbody td {
+  border-bottom: 1px solid #d4af37;
+}
+
+/* Styling for the Add Button */
+.btn-add {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  background: #d4af37;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.btn-logout:hover {
-  background: #ff4d4d;
+.btn-add:hover {
+  background: #f4e57a;
   transform: scale(1.05);
 }
 
-.btn-logout:active {
-  background: #e60000;
+.btn-add:active {
+  background: #d4af37;
   transform: scale(1);
 }
+
