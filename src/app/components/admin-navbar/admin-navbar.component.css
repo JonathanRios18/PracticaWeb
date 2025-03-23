@@ -1,0 +1,18 @@
+/* Importar los estilos generales de la barra de navegación */
+@import '../navbar/navbar.component.css'; /* Reutiliza los estilos de la navbar general */
+
+/* Estilos específicos para la barra de navegación del admin */
+nav {
+    background: linear-gradient(to right, #1d1d1d, #2b2b2b);  /* Ajustar el fondo para el admin */
+}
+
+.nav-links .btn {
+    font-size: 1.5rem;  /* Ajustar tamaño de texto en los botones */
+}
+
+.title {
+    font-size: 2rem; /* Ajustar tamaño del título */
+    color: #d4af37;  /* Color dorado para el título */
+    text-shadow: 3px 3px 6px #000, 0px 0px 20px #d4af37;
+}
+

@@ -23,7 +23,13 @@
       <input type="tel" id="phone" placeholder="Phone number" formControlName="phone_number" />
     </div>
 
+    <div class="form-row">
+      <label for="birth_day">Birth Day</label>
+      <input type="date" id="birth_day" placeholder="Enter your birth date" formControlName="birth_day" />
+    </div>
+
     <button class="btn-register" type="submit">Register</button>
+    <button class="btn-activate" routerLink="/activation">Click para activar tu cuenta</button>
 
     <p *ngIf="message" class="message">{{ message }}</p>
   </form>

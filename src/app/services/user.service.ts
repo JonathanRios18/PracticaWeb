@@ -6,11 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = `http://192.168.100.194:8000/api/users`;  // API de registro en Laravel
+  private apiUrl = `http://192.168.100.194:8000/api`;
 
   constructor(private http: HttpClient) {}
 
   register(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, data);
+    return this.http.post<any>(`${this.apiUrl}/users`, data);
+  }
+
+  activateAccount(email: string, code: string): Observable<any> {
+    const activationUrl = `${this.apiUrl}/users/activate`; // URL del endpoint de activación
+    return this.http.post<any>(activationUrl, { email, code });
   }
 }

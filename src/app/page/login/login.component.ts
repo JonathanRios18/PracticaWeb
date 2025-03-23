@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +22,8 @@ export class LoginComponent {
       this.authService.login(this.email, this.password).subscribe({
         next: (response) => {
           console.log('Login successful', response);
-          // Almacenar el token en el almacenamiento local o manejo de sesión
           localStorage.setItem('token', response.token);
-          
-          // Redirigir a la página de inicio (home) o cualquier otra ruta
-          this.router.navigate(['/']);  // Esto redirige a la ruta principal
+          this.router.navigate(['/dashboard']);
         },
         error: (error) => {
           console.error('Login error', error);

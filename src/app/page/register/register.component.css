@@ -54,8 +54,8 @@ input:focus {
 
 /* Button Styling */
 .btn-register {
-  padding: 0.6rem 1rem; /* Reduce el tamaño del botón */
-  font-size: 1rem; /* Reduce el tamaño del texto del botón */
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
   background: #d4af37;
   border: none;
   border-radius: 5px;
@@ -66,5 +66,22 @@ input:focus {
 
 .btn-register:hover {
   background: #f4e57a;
+  transform: scale(1.03);
+}
+
+/* Estilo del botón de registro */
+.btn-activate {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  background: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-activate:hover {
+  background: #0056b3;
   transform: scale(1.03);
 }
