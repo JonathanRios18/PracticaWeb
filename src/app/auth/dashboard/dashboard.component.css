@@ -107,15 +107,18 @@ tbody td {
   border-bottom: 1px solid #d4af37;
 }
 
-/* Styling for the Add Button */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 .btn-add {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
   background: #d4af37;
-  color: #fff;
+  color: #1a1a1a;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -132,4 +135,3 @@ tbody td {
   background: #d4af37;
   transform: scale(1);
 }
-

@@ -1,26 +1,29 @@
 <app-admin-navbar></app-admin-navbar>
 
 <div class="table-container">
-  <h2 class="table-title">Lista de Enemigos</h2>
-  <table >
+  <div class="table-header">
+    <h2 class="table-title">Lista de Enemigos</h2>
+    <button class="btn-add">Agregar</button>
+  </div>
+
+  <table>
     <thead>
       <tr>
         <th>ID</th>
         <th>Nombre</th>
         <th>Descripción</th>
         <th>Tipo</th>
-        <th>Nivel de Fuerza</th>
+        <th>Nivel de Fuerza</th>        
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let enemy of enemies">
-        <td>{{ enemy.id }}</td>
-        <td>{{ enemy.name }}</td>
-        <td>{{ enemy.description }}</td>
-        <td>{{ enemy.type }}</td>
-        <td>{{ enemy.strength_level }}</td>
+      <tr *ngFor="let enemies of enemies">
+        <td>{{ enemies.id }}</td>
+        <td>{{ enemies.name }}</td>
+        <td>{{ enemies.description }}</td>
+        <td>{{ enemies.type }}</td>
+        <td>{{ enemies.strength_level }}</td>
       </tr>
     </tbody>
   </table>
 </div>
-
