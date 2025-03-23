@@ -1,1 +1,35 @@
-<p>characters works!</p>
+<app-admin-navbar></app-admin-navbar>
+
+<div>
+  <h2>Lista de Personajes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Nivel</th>
+        <th>Salud</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of characters">
+        <td>{{ character.id }}</td>
+        <td>{{ character.name }}</td>
+        <td>{{ character.level }}</td>
+        <td>{{ character.health }}</td>
+        <td>
+          <button (click)="selectCharacter(character.id)">Detalles</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="selectedCharacter">
+  <h3>Detalles del Personaje</h3>
+  <p><strong>ID:</strong> {{ selectedCharacter.id }}</p>
+  <p><strong>Nombre:</strong> {{ selectedCharacter.name }}</p>
+  <p><strong>Nivel:</strong> {{ selectedCharacter.level }}</p>
+  <p><strong>Salud:</strong> {{ selectedCharacter.health }}</p>
+</div>

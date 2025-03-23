@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';  // Asegúrate de que la ruta sea correcta
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin-navbar',
+  imports: [RouterModule],
   templateUrl: './admin-navbar.component.html',
   styleUrls: ['./admin-navbar.component.css'],
   standalone: true

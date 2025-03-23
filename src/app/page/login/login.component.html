@@ -1,9 +1,9 @@
-<app-navbar></app-navbar> <!-- La barra de navegación -->
+<app-navbar></app-navbar> <!-- Tu barra de navegación -->
 
 <section class="login-container">
   <h2 class="title">Welcome Back</h2>
   <form class="login-form" (ngSubmit)="onLogin()">
-    <!-- Email Field -->
+    <!-- Campo Email -->
     <div class="form-group">
       <label for="email">Email</label>
       <input
@@ -16,7 +16,7 @@
       />
     </div>
 
-    <!-- Password Field -->
+    <!-- Campo Contraseña -->
     <div class="form-group">
       <label for="password">Password</label>
       <input
@@ -29,7 +29,10 @@
       />
     </div>
 
-    <!-- Submit Button -->
+    <!-- Mensaje de Error -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <!-- Botón de Enviar -->
     <button class="btn-login" type="submit">Login</button>
   </form>
 </section>

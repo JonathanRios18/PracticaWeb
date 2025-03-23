@@ -1,9 +1,28 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface Character {
+  id: number;
+  name: string;
+  level: number;
+  health: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharacterService {
+  private apiUrl = 'http://192.168.100.194:8000/api/characters'; // Laravel backend
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
+
+  getCharacters(): Observable<Character[]> {
+    return this.http.get<Character[]>(this.apiUrl);
+  }
+
+  getCharacter(id: number): Observable<Character> {
+    return this.http.get<Character>(`${this.apiUrl}/${id}`);
+  }
 }
+
