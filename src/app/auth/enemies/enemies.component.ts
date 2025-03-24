@@ -17,7 +17,7 @@ export class EnemiesComponent implements OnInit {
   enemies: Enemy[] = [];
   selectedEnemy: Enemy | null = null;
   isModalOpen: boolean = false;
-  userRole: string | null = null; // Variable para almacenar el rol del usuario
+  userRole: string | null = null;
 
   newEnemy: Enemy = {
     id: 0,
@@ -31,7 +31,7 @@ export class EnemiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEnemies();
-    this.getUserRole(); // Obtener el rol al iniciar el componente
+    this.getUserRole();
   }
 
   getUserRole(): void {
@@ -39,7 +39,7 @@ export class EnemiesComponent implements OnInit {
     if (token) {
       try {
         const decodedToken: any = jwtDecode(token);
-        this.userRole = decodedToken?.role || null; // Obtener el rol del token
+        this.userRole = decodedToken?.role || null;
       } catch (error) {
         console.error('Error al decodificar el token:', error);
       }

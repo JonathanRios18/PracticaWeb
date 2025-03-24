@@ -19,7 +19,7 @@ export class InventoriesComponent implements OnInit, OnDestroy {
   characters: Character[] = [];
   newInventoryItem: InventoryForm = { id: 0, item_name: '', quantity: 0, character_id: 0 };
   showModal: boolean = false;
-  userRole: string | null = null; // Variable para almacenar el rol del usuario
+  userRole: string | null = null;
 
   private pollingInterval: any;
 
@@ -32,7 +32,7 @@ export class InventoriesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadInventory();
     this.loadCharacters();
-    this.getUserRole(); // Obtener el rol del usuario al iniciar
+    this.getUserRole();
     this.startPolling();
   }
 

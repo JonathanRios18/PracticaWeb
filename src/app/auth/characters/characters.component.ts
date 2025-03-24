@@ -23,7 +23,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
     health: 100
   };
 
-  userRole: string | null = null; // Variable para almacenar el rol del usuario
+  userRole: string | null = null;
 
   private pollingInterval: any;
 
@@ -31,7 +31,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadCharacters();
-    this.getUserRole(); // Obtener el rol al iniciar el componente
+    this.getUserRole();
     this.startPolling();
   }
 

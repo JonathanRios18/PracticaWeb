@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { Router } from '@angular/router';  // Importar Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activation',
@@ -20,7 +20,7 @@ export class ActivationComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router  // Inyectar Router
+    private router: Router
   ) {
     this.activationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

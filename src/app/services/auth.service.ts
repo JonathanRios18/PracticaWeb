@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { jwtDecode } from 'jwt-decode'; // Usar jwt-decode para decodificar el token
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://192.168.252.226:8000/api'; // URL de tu backend
+  private apiUrl = 'http://192.168.252.226:8000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +31,7 @@ export class AuthService {
 
   // Guardar token en localStorage
   saveToken(token: string): void {
-    localStorage.setItem('auth_token', token); // Guardar token en localStorage
+    localStorage.setItem('auth_token', token);
   }
 
   // Eliminar token de localStorage
@@ -48,12 +48,12 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const decodedToken: any = jwtDecode(token);
-      console.log('Decoded Token:', decodedToken); // Debugging
+      console.log('Decoded Token:', decodedToken);
       return decodedToken.exp > Date.now() / 1000;
     }
     return false;
   }  
-  
+
   decodeToken(token: string): any {
     try {
       return jwtDecode(token);

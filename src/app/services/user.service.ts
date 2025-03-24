@@ -15,7 +15,7 @@ export class UserService {
   }
 
   activateAccount(email: string, code: string): Observable<any> {
-    const activationUrl = `${this.apiUrl}/users/activate`; // URL del endpoint de activación
+    const activationUrl = `${this.apiUrl}/users/activate`;
     return this.http.post<any>(activationUrl, { email, code });
   }
 }

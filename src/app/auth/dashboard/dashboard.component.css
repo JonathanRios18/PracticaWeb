@@ -58,7 +58,7 @@
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   color: #fff;
-  margin-top: 4rem; /* Adding margin to leave space for the button */
+  margin-top: 4rem;
 }
 
 .table-title {
@@ -214,30 +214,28 @@ tbody td {
 
 /* Combobox Styling */
 .modal-content select {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  padding: 0.5rem; /* Espaciado interno */
-  margin-top: 0.3rem; /* Espaciado superior */
-  border: 1px solid #d4af37; /* Borde dorado */
-  border-radius: 5px; /* Esquinas redondeadas */
-  background: rgba(30, 30, 30, 0.8); /* Fondo oscuro por defecto */
-  color: #fff; /* Texto blanco */
-  font-size: 1rem; /* Tamaño del texto */
-  font-family: 'Uncial Antiqua', cursive; /* Tipografía acorde al diseño */
-  text-align: center; /* Centra el texto */
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #d4af37;
+  border-radius: 5px;
+  background: rgba(30, 30, 30, 0.8);
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Uncial Antiqua', cursive;
+  text-align: center;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Cambiar el fondo cuando el combobox se despliega */
 .modal-content select:focus {
-  outline: none; /* Elimina el borde por defecto al hacer focus */
-  background: rgba(50, 50, 50, 1); /* Fondo más claro y sólido */
-  color: #f4e57a; /* Cambia el texto a dorado para mayor contraste */
-  border-color: #f4e57a; /* Cambia el borde al dorado claro */
+  outline: none;
+  background: rgba(50, 50, 50, 1);
+  color: #f4e57a;
+  border-color: #f4e57a;
 }
 
-/* Asegúrate de agregar estilos adecuados para el botón de eliminar */
 .btn-delete {
-  background-color: #f44336; /* Rojo */
+  background-color: #f44336;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -246,5 +244,5 @@ tbody td {
 }
 
 .btn-delete:hover {
-  background-color: #d32f2f; /* Rojo oscuro */
+  background-color: #d32f2f;
 }

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Interfaz para mostrar en la tabla
 export interface SkillDisplay {
   id: number;
   skill_name: string;
@@ -22,7 +21,7 @@ export interface SkillForm {
   providedIn: 'root',
 })
 export class SkillService {
-  private apiUrl = 'http://192.168.252.226:8000/api/skills'; // Ajusta la URL si es necesario
+  private apiUrl = 'http://192.168.252.226:8000/api/skills';
 
   constructor(private http: HttpClient) {}
 

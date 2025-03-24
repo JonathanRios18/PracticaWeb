@@ -15,11 +15,11 @@ import { jwtDecode }from 'jwt-decode';
   imports: [AdminNavbarComponent, FormsModule, CommonModule],
 })
 export class SkillsComponent implements OnInit {
-  skills: SkillDisplay[] = []; // Para mostrar en la tabla
-  characters: Character[] = []; // Lista de personajes
-  newSkill: SkillForm = { id: 0, skill_name: '', type: '', character_id: 0 }; // Modelo para el formulario
+  skills: SkillDisplay[] = [];
+  characters: Character[] = [];
+  newSkill: SkillForm = { id: 0, skill_name: '', type: '', character_id: 0 };
   showModal: boolean = false;
-  userRole: string | null = null; // Variable para almacenar el rol del usuario
+  userRole: string | null = null;
 
   private pollingInterval: any;
 
@@ -92,7 +92,6 @@ export class SkillsComponent implements OnInit {
     if (this.newSkill.skill_name && this.newSkill.type && this.newSkill.character_id) {
       this.skillService.addSkill(this.newSkill).subscribe(
         (response) => {
-          // Convertir la respuesta en SkillDisplay para mostrarla en la tabla
           const skillDisplay: SkillDisplay = {
             id: response.id,
             skill_name: response.skill_name,
@@ -100,8 +99,8 @@ export class SkillsComponent implements OnInit {
             character: this.characters.find(c => c.id === response.character_id)?.name || ''
           };
 
-          this.skills.push(skillDisplay); // Añadir a la lista
-          this.closeModal(); // Cerrar el modal
+          this.skills.push(skillDisplay);
+          this.closeModal();
         },
         (error) => {
           console.error('Error adding skill:', error);
@@ -112,7 +111,6 @@ export class SkillsComponent implements OnInit {
     }
   }
 
-  // Método para eliminar una habilidad
   deleteSkill(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta habilidad?')) {
       this.skillService.deleteSkill(id).subscribe(

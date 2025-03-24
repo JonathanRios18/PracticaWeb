@@ -16,7 +16,7 @@ import { jwtDecode }from 'jwt-decode';
 export class NationsComponent implements OnInit {
   nations: Nation[] = [];
   isModalOpen: boolean = false;
-  userRole: string | null = null; // Variable para almacenar el rol del usuario
+  userRole: string | null = null;
 
   newNation: Nation = {
     id: 0,
@@ -29,7 +29,7 @@ export class NationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadNations();
-    this.getUserRole(); // Obtener el rol del usuario al iniciar
+    this.getUserRole();
   }
 
   getUserRole(): void {
@@ -68,9 +68,9 @@ export class NationsComponent implements OnInit {
     this.nationService.addNation(this.newNation).subscribe(
       (response) => {
         console.log('Nación agregada exitosamente:', response);
-        this.nations.push(response); // Actualiza la lista local
+        this.nations.push(response);
         this.closeModal();
-        this.loadNations(); // Actualiza la lista de naciones
+        this.loadNations(); 
       },
       (error) => {
         console.error('Error al agregar la nación:', error);
@@ -87,7 +87,6 @@ export class NationsComponent implements OnInit {
     };
   }
 
-  // Método para eliminar una nación
   deleteNation(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta nación?')) {
       this.nationService.deleteNation(id).subscribe(

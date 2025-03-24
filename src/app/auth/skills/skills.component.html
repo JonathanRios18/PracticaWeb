@@ -12,7 +12,7 @@
         <th>Nombre</th>
         <th>Tipo</th>
         <th>Personaje</th>
-        <th *ngIf="userRole === 'admin'">Acciones</th>  <!-- New column for actions -->
+        <th *ngIf="userRole === 'admin'">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
         <td>{{ skill.type }}</td>
         <td>{{ skill.character }}</td>
         <td *ngIf="userRole === 'admin'">
-          <button (click)="deleteSkill(skill.id)" class="btn-delete">Eliminar</button>  <!-- Delete button -->
+          <button (click)="deleteSkill(skill.id)" class="btn-delete">Eliminar</button>
         </td>
       </tr>
     </tbody>

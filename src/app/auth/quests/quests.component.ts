@@ -17,8 +17,8 @@ import { jwtDecode }from 'jwt-decode';
   imports: [AdminNavbarComponent, CommonModule, FormsModule],
 })
 export class QuestsComponent implements OnInit {
-  userRole: string | null = null; // Variable para almacenar el rol del usuario
-  quests: QuestDisplay[] = []; // Para mostrar en la tabla
+  userRole: string | null = null;
+  quests: QuestDisplay[] = [];
   newQuest: QuestForm = {
     id: 0,
     title: '',
@@ -27,7 +27,7 @@ export class QuestsComponent implements OnInit {
     character_id: 0,
     enemy_id: 0,
     nation_id: 0,
-  }; // Modelo para el formulario
+  };
   characters: Character[] = []; // Lista de personajes
   enemies: Enemy[] = []; // Lista de enemigos
   nations: Nation[] = []; // Lista de naciones
@@ -46,7 +46,7 @@ export class QuestsComponent implements OnInit {
     this.loadCharacters();
     this.loadEnemies();
     this.loadNations();
-    this.getUserRole(); // Obtener el rol del usuario al iniciar
+    this.getUserRole();
   }
 
   getUserRole(): void {
@@ -161,7 +161,6 @@ export class QuestsComponent implements OnInit {
     }
   }
 
-  // Método para eliminar una nación
   deleteQuest(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta nación?')) {
       this.questService.deleteQuest(id).subscribe(

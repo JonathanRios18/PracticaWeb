@@ -22,7 +22,7 @@ export interface InventoryForm {
   providedIn: 'root',
 })
 export class InventoryService {
-  private apiUrl = 'http://192.168.252.226:8000/api/inventories'; // URL del backend
+  private apiUrl = 'http://192.168.252.226:8000/api/inventories';
 
   constructor(private http: HttpClient) {}
 

@@ -29,7 +29,6 @@ export class LoginComponent {
         if (token) {
           this.authService.saveToken(token);
           console.log('Token guardado:', this.authService.getToken()); // Verificar almacenamiento
-          this.errorMessage = '';
           this.router.navigate(['/dashboard']);
         } else {
           console.error('No se recibió un token válido.');
