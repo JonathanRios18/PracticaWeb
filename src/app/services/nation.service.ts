@@ -13,7 +13,7 @@ export interface Nation {
   providedIn: 'root'
 })
 export class NationService {
-  private apiUrl = 'http://192.168.100.194:8000/api/nations'; // URL de tu backend
+  private apiUrl = 'http://192.168.252.226:8000/api/nations'; // URL de tu backend
 
   constructor(private http: HttpClient) {}
 

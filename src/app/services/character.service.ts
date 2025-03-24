@@ -13,7 +13,7 @@ export interface Character {
   providedIn: 'root'
 })
 export class CharacterService {
-  private apiUrl = 'http://192.168.100.194:8000/api/characters'; // Laravel backend
+  private apiUrl = 'http://192.168.252.226:8000/api/characters'; // Laravel backend
 
   constructor(private http: HttpClient) {}
 

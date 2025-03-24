@@ -11,6 +11,7 @@ import { InventoriesComponent } from './auth/inventories/inventories.component';
 import { EnemiesComponent } from './auth/enemies/enemies.component';
 import { NationsComponent } from './auth/nations/nations.component';
 import { QuestsComponent } from './auth/quests/quests.component';
+import { ProfileComponent } from './auth/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,5 +25,6 @@ export const routes: Routes = [
   { path: 'enemies', component: EnemiesComponent, canActivate: [AuthGuard] },
   { path: 'nations', component: NationsComponent, canActivate: [AuthGuard] },
   { path: 'quests', component: QuestsComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];

@@ -22,7 +22,7 @@ export interface SkillForm {
   providedIn: 'root',
 })
 export class SkillService {
-  private apiUrl = 'http://192.168.100.194:8000/api/skills'; // Ajusta la URL si es necesario
+  private apiUrl = 'http://192.168.252.226:8000/api/skills'; // Ajusta la URL si es necesario
 
   constructor(private http: HttpClient) {}
 

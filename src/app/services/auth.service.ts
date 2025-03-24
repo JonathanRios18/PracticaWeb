@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode'; // Usar jwt-decode para decodificar el t
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://192.168.100.194:8000/api'; // URL de tu backend
+  private apiUrl = 'http://192.168.252.226:8000/api'; // URL de tu backend
 
   constructor(private http: HttpClient) {}
 
@@ -44,13 +44,13 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
-  // Verificar si el usuario está autenticado
   isAuthenticated(): boolean {
     const token = this.getToken();
     if (token) {
-      const decodedToken: any = jwtDecode(token); // Decodificar el token
-      return decodedToken.exp > Date.now() / 1000; // Verificar si el token no ha expirado
+      const decodedToken: any = jwtDecode(token);
+      console.log('Decoded Token:', decodedToken); // Debugging
+      return decodedToken.exp > Date.now() / 1000;
     }
     return false;
-  }
+  }  
 }

@@ -14,7 +14,7 @@ export interface Enemy {
   providedIn: 'root'
 })
 export class EnemyService {
-  private apiUrl = 'http://192.168.100.194:8000/api/enemies'; // URL de tu backend
+  private apiUrl = 'http://192.168.252.226:8000/api/enemies'; // URL de tu backend
 
   constructor(private http: HttpClient) {}
 

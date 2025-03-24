@@ -26,7 +26,7 @@ export interface QuestForm {
   providedIn: 'root',
 })
 export class QuestService {
-  private apiUrl = 'http://192.168.100.194:8000/api/quests';
+  private apiUrl = 'http://192.168.252.226:8000/api/quests';
 
   constructor(private http: HttpClient) {}
 
