@@ -1,33 +1,84 @@
 import { Component, OnInit } from '@angular/core';
-import { SkillService, Skill } from '../../services/skill.service';
+import { SkillService, SkillDisplay, SkillForm } from '../../services/skill.service';
+import { CharacterService, Character } from '../../services/character.service';
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.css'],
   standalone: true,
-  imports: [AdminNavbarComponent, CommonModule],
+  imports: [AdminNavbarComponent, FormsModule, CommonModule],
 })
 export class SkillsComponent implements OnInit {
-  skills: Skill[] = [];
-  selectedSkill: Skill | null = null;
+  skills: SkillDisplay[] = []; // Para mostrar en la tabla
+  characters: Character[] = []; // Lista de personajes
+  newSkill: SkillForm = { id: 0, skill_name: '', type: '', character_id: 0 }; // Modelo para el formulario
+  showModal: boolean = false;
 
-  constructor(private skillService: SkillService) {}
+  constructor(private skillService: SkillService, private characterService: CharacterService) {}
 
   ngOnInit(): void {
     this.loadSkills();
+    this.loadCharacters(); // Cargar personajes para el combobox
   }
 
   loadSkills(): void {
     this.skillService.getSkills().subscribe(
-      (data) => {
+      (data: SkillDisplay[]) => {
         this.skills = data;
       },
       (error) => {
-        console.error('Error al cargar las habilidades:', error);
+        console.error('Error loading skills:', error);
       }
     );
+  }
+
+  loadCharacters(): void {
+    this.characterService.getCharacters().subscribe(
+      (data: Character[]) => {
+        this.characters = data;
+      },
+      (error) => {
+        console.error('Error loading characters:', error);
+      }
+    );
+  }
+
+  openModal(): void {
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    // Reiniciar el modelo del formulario
+    this.newSkill = { id: 0, skill_name: '', type: '', character_id: 0 };
+  }
+
+  addSkill(): void {
+    if (this.newSkill.skill_name && this.newSkill.type && this.newSkill.character_id) {
+      this.skillService.addSkill(this.newSkill).subscribe(
+        (response) => {
+          // Convertir la respuesta en SkillDisplay para mostrarla en la tabla
+          const skillDisplay: SkillDisplay = {
+            id: response.id,
+            skill_name: response.skill_name,
+            type: response.type,
+            character: this.characters.find(c => c.id === response.character_id)?.name || 'Unknown'
+          };
+
+          this.skills.push(skillDisplay); // Añadir a la lista
+          this.closeModal(); // Cerrar el modal
+          this.loadSkills(); // Recargar lista de habilidades
+        },
+        (error) => {
+          console.error('Error adding skill:', error);
+        }
+      );
+    } else {
+      alert('Por favor, completa todos los campos.');
+    }
   }
 }

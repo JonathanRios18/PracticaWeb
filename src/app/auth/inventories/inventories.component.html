@@ -2,14 +2,14 @@
 
 <div class="table-container">
   <div class="table-header">
-    <h2 class="table-title">Lista de Personajes</h2>
-    <button class="btn-add">Agregar</button>
+    <h2 class="table-title">Lista de Inventarios</h2>
+    <button class="btn-add" (click)="openModal()">Agregar</button>
   </div>
   <table>
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nombre</th>
+        <th>Nombre del Ítem</th>
         <th>Cantidad</th>
         <th>Personaje</th>
       </tr>
@@ -23,4 +23,30 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal para agregar un ítem -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Nuevo Ítem al Inventario</h2>
+    <form (ngSubmit)="addInventoryItem()">
+      <label for="item_name">Nombre del Ítem:</label>
+      <input type="text" id="item_name" [(ngModel)]="newInventoryItem.item_name" name="item_name" required>
+
+      <label for="quantity">Cantidad:</label>
+      <input type="number" id="quantity" [(ngModel)]="newInventoryItem.quantity" name="quantity" required min="1">
+
+      <label for="character">Personaje:</label>
+      <select id="character" [(ngModel)]="newInventoryItem.character_id" name="character_id" required>
+        <option *ngFor="let character of characters" [value]="character.id">
+          {{ character.name }}
+        </option>
+      </select>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-add">Guardar</button>
+        <button type="button" class="btn-close" (click)="closeModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
 </div>

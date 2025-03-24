@@ -17,37 +17,38 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let enemies of enemies">
-        <td>{{ enemies.id }}</td>
-        <td>{{ enemies.name }}</td>
-        <td>{{ enemies.description }}</td>
-        <td>{{ enemies.type }}</td>
-        <td>{{ enemies.strength_level }}</td>
+      <tr *ngFor="let enemy of enemies">
+        <td>{{ enemy.id }}</td>
+        <td>{{ enemy.name }}</td>
+        <td>{{ enemy.description }}</td>
+        <td>{{ enemy.type }}</td>
+        <td>{{ enemy.strength_level }}</td>
       </tr>
     </tbody>
   </table>
 </div>
 
 <!-- Modal -->
-<div class="modal" *ngIf="isModalOpen">
+<div *ngIf="isModalOpen" class="modal">
   <div class="modal-content">
     <h2 class="modal-title">Agregar Enemigo</h2>
-    <form (submit)="addEnemy()">
-      <label for="name">Nombre</label>
+    <form (ngSubmit)="addEnemy()">
+      <label for="name">Nombre:</label>
       <input id="name" [(ngModel)]="newEnemy.name" name="name" required />
 
-      <label for="description">Descripción</label>
-      <input
-        id="description"
-        [(ngModel)]="newEnemy.description"
-        name="description"
-        required
-      />
+      <label for="description">Descripción:</label>
+      <input id="description" [(ngModel)]="newEnemy.description" name="description" required />
 
-      <label for="type">Tipo</label>
-      <input id="type" [(ngModel)]="newEnemy.type" name="type" required />
+      <label for="type">Tipo:</label>
+      <select id="type" [(ngModel)]="newEnemy.type" name="type" required>
+        <option value="orc">Orco</option>
+        <option value="human">Humano</option>
+        <option value="elf">Elfo</option>
+        <option value="undead">No-muerto</option>
+        <option value="beast">Bestia</option>
+      </select>
 
-      <label for="strength_level">Nivel de Fuerza</label>
+      <label for="strength_level">Nivel de Fuerza:</label>
       <input
         type="number"
         id="strength_level"

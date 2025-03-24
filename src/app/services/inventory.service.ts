@@ -2,26 +2,35 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface InventoryItem {
+// Interfaz para visualización
+export interface InventoryDisplay {
   id: number;
   item_name: string;
   quantity: number;
-  character: string;
+  character: string; // Nombre del personaje
+}
+
+// Interfaz para envío al backend
+export interface InventoryForm {
+  id: number;
+  item_name: string;
+  quantity: number;
+  character_id: number; // ID del personaje
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class InventoryService {
-  private apiUrl = 'http://192.168.100.194:8000/api/inventories';
+  private apiUrl = 'http://192.168.100.194:8000/api/inventories'; // URL del backend
 
   constructor(private http: HttpClient) {}
 
-  getInventory(): Observable<InventoryItem[]> {
-    return this.http.get<InventoryItem[]>(this.apiUrl);
+  getInventory(): Observable<InventoryDisplay[]> {
+    return this.http.get<InventoryDisplay[]>(this.apiUrl);
   }
 
-  getInventoryItem(id: number): Observable<InventoryItem> {
-    return this.http.get<InventoryItem>(`${this.apiUrl}/${id}`);
+  addInventory(item: InventoryForm): Observable<InventoryForm> {
+    return this.http.post<InventoryForm>(this.apiUrl, item);
   }
 }

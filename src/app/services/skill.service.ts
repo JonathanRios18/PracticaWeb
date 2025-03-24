@@ -1,12 +1,21 @@
+// skill.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface Skill {
+// Interfaz para mostrar en la tabla
+export interface SkillDisplay {
   id: number;
   skill_name: string;
   type: string;
-  character: string;
+  character: string; // Nombre del personaje
+}
+
+export interface SkillForm {
+  id: number;
+  skill_name: string;
+  type: string;
+  character_id: number; // ID del personaje
 }
 
 @Injectable({
@@ -17,11 +26,15 @@ export class SkillService {
 
   constructor(private http: HttpClient) {}
 
-  getSkills(): Observable<Skill[]> {
-    return this.http.get<Skill[]>(this.apiUrl);
+  getSkills(): Observable<SkillDisplay[]> {
+    return this.http.get<SkillDisplay[]>(this.apiUrl);
   }
 
-  getSkill(id: number): Observable<Skill> {
-    return this.http.get<Skill>(`${this.apiUrl}/${id}`);
+  getSkill(id: number): Observable<SkillDisplay> {
+    return this.http.get<SkillDisplay>(`${this.apiUrl}/${id}`);
+  }
+
+  addSkill(skill: SkillForm): Observable<SkillForm> {
+    return this.http.post<SkillForm>(this.apiUrl, skill);
   }
 }

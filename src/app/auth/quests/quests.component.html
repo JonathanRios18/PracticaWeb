@@ -2,9 +2,9 @@
 
 <div class="table-container">
   <div class="table-header">
-    <h2 class="table-title">Lista de Personajes</h2>
-    <button class="btn-add">Agregar</button>
-  </div>  
+    <h2 class="table-title">Lista de Misiones</h2>
+    <button class="btn-add" (click)="openModal()">Agregar</button>
+  </div>
   <table>
     <thead>
       <tr>
@@ -29,4 +29,45 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal para agregar misión -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Nueva Misión</h2>
+    <form (ngSubmit)="addQuest()">
+      <label for="title">Título:</label>
+      <input type="text" id="title" [(ngModel)]="newQuest.title" name="title" required />
+
+      <label for="description">Descripción:</label>
+      <textarea id="description" [(ngModel)]="newQuest.description" name="description" required></textarea>
+
+      <label for="dificulty_level">Nivel de Dificultad:</label>
+      <select id="dificulty_level" [(ngModel)]="newQuest.dificulty_level" name="dificulty_level" required>
+        <option value="easy">Fácil</option>
+        <option value="normal">Normal</option>
+        <option value="hard">Difícil</option>
+      </select>
+
+      <label for="character">Personaje:</label>
+      <select id="character" [(ngModel)]="newQuest.character_id" name="character_id" required>
+        <option *ngFor="let character of characters" [value]="character.id">{{ character.name }}</option>
+      </select>
+
+      <label for="enemy">Enemigo:</label>
+      <select id="enemy" [(ngModel)]="newQuest.enemy_id" name="enemy_id" required>
+        <option *ngFor="let enemy of enemies" [value]="enemy.id">{{ enemy.name }}</option>
+      </select>
+
+      <label for="nation">Nación:</label>
+      <select id="nation" [(ngModel)]="newQuest.nation_id" name="nation_id" required>
+        <option *ngFor="let nation of nations" [value]="nation.id">{{ nation.name }}</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-add">Guardar</button>
+        <button type="button" class="btn-close" (click)="closeModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
 </div>

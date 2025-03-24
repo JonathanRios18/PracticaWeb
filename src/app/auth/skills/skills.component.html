@@ -2,8 +2,8 @@
 
 <div class="table-container">
   <div class="table-header">
-    <h2 class="table-title">Lista de Personajes</h2>
-    <button class="btn-add">Agregar</button>
+    <h2 class="table-title">Lista de Habilidades</h2>
+    <button class="btn-add" (click)="openModal()">Agregar</button>
   </div>
   <table>
     <thead>
@@ -23,4 +23,36 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal para agregar habilidad -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Nueva Habilidad</h2>
+    <form (ngSubmit)="addSkill()">
+      <label for="skill_name">Nombre de la habilidad:</label>
+      <input type="text" id="skill_name" [(ngModel)]="newSkill.skill_name" name="skill_name" required>
+
+      <label for="type">Tipo:</label>
+      <select id="type" [(ngModel)]="newSkill.type" name="type" required>
+        <option value="fire">Fire</option>
+        <option value="water">Water</option>
+        <option value="earth">Earth</option>
+        <option value="air">Air</option>
+        <option value="light">Light</option>
+      </select>
+
+      <label for="character">Personaje:</label>
+      <select id="character" [(ngModel)]="newSkill.character_id" name="character_id" required>
+        <option *ngFor="let character of characters" [value]="character.id">
+          {{ character.name }}
+        </option>
+      </select>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-add">Guardar</button>
+        <button type="button" class="btn-close" (click)="closeModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
 </div>

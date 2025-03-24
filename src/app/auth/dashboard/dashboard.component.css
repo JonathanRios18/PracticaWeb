@@ -211,3 +211,26 @@ tbody td {
   background: #ff4c4c;
   transform: scale(1);
 }
+
+/* Combobox Styling */
+.modal-content select {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 0.5rem; /* Espaciado interno */
+  margin-top: 0.3rem; /* Espaciado superior */
+  border: 1px solid #d4af37; /* Borde dorado */
+  border-radius: 5px; /* Esquinas redondeadas */
+  background: rgba(30, 30, 30, 0.8); /* Fondo oscuro por defecto */
+  color: #fff; /* Texto blanco */
+  font-size: 1rem; /* Tamaño del texto */
+  font-family: 'Uncial Antiqua', cursive; /* Tipografía acorde al diseño */
+  text-align: center; /* Centra el texto */
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Cambiar el fondo cuando el combobox se despliega */
+.modal-content select:focus {
+  outline: none; /* Elimina el borde por defecto al hacer focus */
+  background: rgba(50, 50, 50, 1); /* Fondo más claro y sólido */
+  color: #f4e57a; /* Cambia el texto a dorado para mayor contraste */
+  border-color: #f4e57a; /* Cambia el borde al dorado claro */
+}
