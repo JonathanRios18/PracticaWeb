@@ -51,8 +51,7 @@ export class CharactersComponent implements OnInit {
       (response) => {
         this.characters.push(response);
         this.closeModal();
-        this.newCharacter = { name: '', level: 1, health: 100 };
-      },
+        this.loadCharacters();},
       (error) => {
         console.error('Error al agregar personaje:', error);
       }
