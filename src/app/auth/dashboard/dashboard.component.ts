@@ -13,10 +13,12 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if (!localStorage.getItem('token')) {
-      window.location.href = '/login'; 
+    if (!this.authService.isAuthenticated()) {
+      this.authService.logout().subscribe();
+      this.router.navigate(['/login']);
     }
   }
+  
 }
 
 

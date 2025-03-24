@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { FormsModule } from '@angular/forms';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-characters',
@@ -22,18 +23,33 @@ export class CharactersComponent implements OnInit, OnDestroy {
     health: 100
   };
 
+  userRole: string | null = null; // Variable para almacenar el rol del usuario
+
   private pollingInterval: any;
 
   constructor(private characterService: CharacterService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadCharacters();
-    this.startPolling();  // Iniciar polling al cargar el componente
+    this.getUserRole(); // Obtener el rol al iniciar el componente
+    this.startPolling();
   }
 
   ngOnDestroy(): void {
     if (this.pollingInterval) {
-      clearInterval(this.pollingInterval);  // Detener polling cuando el componente se destruya
+      clearInterval(this.pollingInterval);
+    }
+  }
+
+  getUserRole(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        this.userRole = decodedToken?.role || null;
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+      }
     }
   }
 

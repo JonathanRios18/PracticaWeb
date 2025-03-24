@@ -23,11 +23,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error) => {
+      console.error('Interceptor Error:', error); // Debugging
       if (error.status === 401 || error.status === 403) {
-        // Redirige al login si el token no es válido o ha expirado
+        authService.removeToken();
         router.navigate(['/login']);
       }
       return throwError(error);
     })
-  );
+  );  
 };

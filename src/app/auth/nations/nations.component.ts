@@ -76,7 +76,6 @@ export class NationsComponent implements OnInit {
     if (confirm('¿Estás seguro de que deseas eliminar esta nación?')) {
       this.nationService.deleteNation(id).subscribe(
         () => {
-          // Eliminar la nación de la lista local
           this.nations = this.nations.filter(nation => nation.id !== id);
         },
         (error) => {

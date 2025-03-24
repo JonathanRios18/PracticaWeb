@@ -16,8 +16,8 @@ export class AdminNavbarComponent {
     this.authService.logout().subscribe(
       response => {
         console.log('Logout successful', response);
-        this.authService.removeToken(); // Eliminar el token
-        this.router.navigate(['/login']); // Redirigir a la página de login
+        this.authService.removeToken();
+        this.router.navigate(['/login']);
       },
       error => {
         console.error('Logout failed', error);

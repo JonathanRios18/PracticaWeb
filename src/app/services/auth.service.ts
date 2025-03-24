@@ -53,4 +53,13 @@ export class AuthService {
     }
     return false;
   }  
+  
+  decodeToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return null;
+    }
+  }
 }

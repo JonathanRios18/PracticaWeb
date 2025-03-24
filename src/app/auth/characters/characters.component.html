@@ -13,7 +13,7 @@
         <th>Nombre</th>
         <th>Nivel</th>
         <th>Salud</th>
-        <th>Acciones</th> <!-- Nueva columna -->
+        <th *ngIf="userRole === 'admin'">Acciones</th> <!-- Mostrar solo si es admin -->
       </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
         <td>{{ character.name }}</td>
         <td>{{ character.level }}</td>
         <td>{{ character.health }}</td>
-        <td>
+        <td *ngIf="userRole === 'admin'">
           <button *ngIf="character.id" (click)="deleteCharacter(character.id)" class="btn-delete">Eliminar</button>
         </td>
       </tr>      
