@@ -3,6 +3,8 @@ import { NationService, Nation } from '../../services/nation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
+import { AuthService } from '../../services/auth.service';
+import { jwtDecode }from 'jwt-decode';
 
 @Component({
   selector: 'app-nations',
@@ -14,6 +16,7 @@ import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar
 export class NationsComponent implements OnInit {
   nations: Nation[] = [];
   isModalOpen: boolean = false;
+  userRole: string | null = null; // Variable para almacenar el rol del usuario
 
   newNation: Nation = {
     id: 0,
@@ -22,10 +25,23 @@ export class NationsComponent implements OnInit {
     history: ''
   };
 
-  constructor(private nationService: NationService) {}
+  constructor(private nationService: NationService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadNations();
+    this.getUserRole(); // Obtener el rol del usuario al iniciar
+  }
+
+  getUserRole(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        this.userRole = decodedToken?.role || null;
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+      }
+    }
   }
 
   loadNations(): void {

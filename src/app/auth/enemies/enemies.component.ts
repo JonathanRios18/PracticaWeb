@@ -3,6 +3,8 @@ import { EnemyService, Enemy } from '../../services/enemy.service';
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-enemies',
@@ -15,6 +17,7 @@ export class EnemiesComponent implements OnInit {
   enemies: Enemy[] = [];
   selectedEnemy: Enemy | null = null;
   isModalOpen: boolean = false;
+  userRole: string | null = null; // Variable para almacenar el rol del usuario
 
   newEnemy: Enemy = {
     id: 0,
@@ -24,10 +27,23 @@ export class EnemiesComponent implements OnInit {
     strength_level: 0
   };
 
-  constructor(private enemyService: EnemyService) {}
+  constructor(private enemyService: EnemyService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadEnemies();
+    this.getUserRole(); // Obtener el rol al iniciar el componente
+  }
+
+  getUserRole(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        this.userRole = decodedToken?.role || null; // Obtener el rol del token
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+      }
+    }
   }
 
   loadEnemies(): void {
@@ -74,12 +90,10 @@ export class EnemiesComponent implements OnInit {
     };
   }
 
-  // Método para eliminar un enemigo
   deleteEnemy(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar este enemigo?')) {
       this.enemyService.deleteEnemy(id).subscribe(
         () => {
-          // Eliminar el enemigo de la lista local
           this.enemies = this.enemies.filter(enemy => enemy.id !== id);
         },
         (error) => {

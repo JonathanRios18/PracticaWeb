@@ -15,7 +15,7 @@
         <th>Personaje</th>
         <th>Enemigo</th>
         <th>Nación</th>
-        <th>Acciones</th>
+        <th *ngIf="userRole === 'admin'">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
         <td>{{ quest.character }}</td>
         <td>{{ quest.enemy }}</td>
         <td>{{ quest.nation }}</td>
-        <td>
+        <td *ngIf="userRole === 'admin'">
           <button class="btn-delete" (click)="deleteQuest(quest.id)">Eliminar</button>
       </tr>
     </tbody>

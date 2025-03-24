@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { InventoryService, InventoryDisplay, InventoryForm } from '../../services/inventory.service';
 import { CharacterService, Character } from '../../services/character.service';
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { jwtDecode }from 'jwt-decode';
 
 @Component({
   selector: 'app-inventories',
@@ -12,28 +14,43 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [AdminNavbarComponent, FormsModule, CommonModule],
 })
-export class InventoriesComponent implements OnInit {
-  inventory: InventoryDisplay[] = []; // Para mostrar en la tabla
-  characters: Character[] = []; // Lista de personajes
-  newInventoryItem: InventoryForm = { id: 0, item_name: '', quantity: 0, character_id: 0 }; // Modelo para formulario
+export class InventoriesComponent implements OnInit, OnDestroy {
+  inventory: InventoryDisplay[] = [];
+  characters: Character[] = [];
+  newInventoryItem: InventoryForm = { id: 0, item_name: '', quantity: 0, character_id: 0 };
   showModal: boolean = false;
+  userRole: string | null = null; // Variable para almacenar el rol del usuario
 
   private pollingInterval: any;
 
   constructor(
     private inventoryService: InventoryService,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.loadInventory();
     this.loadCharacters();
+    this.getUserRole(); // Obtener el rol del usuario al iniciar
     this.startPolling();
   }
 
   ngOnDestroy(): void {
     if (this.pollingInterval) {
-      clearInterval(this.pollingInterval);  // Detener polling cuando el componente se destruya
+      clearInterval(this.pollingInterval);
+    }
+  }
+
+  getUserRole(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        this.userRole = decodedToken?.role || null;
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+      }
     }
   }
 
@@ -72,7 +89,7 @@ export class InventoriesComponent implements OnInit {
 
   closeModal(): void {
     this.showModal = false;
-    this.newInventoryItem = { id: 0, item_name: '', quantity: 0, character_id: 0 }; // Reiniciar formulario
+    this.newInventoryItem = { id: 0, item_name: '', quantity: 0, character_id: 0 };
   }
 
   addInventoryItem(): void {
@@ -98,12 +115,10 @@ export class InventoriesComponent implements OnInit {
     }
   }
 
-  // Método para eliminar un ítem de inventario
   deleteInventoryItem(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar este ítem del inventario?')) {
       this.inventoryService.deleteInventory(id).subscribe(
         () => {
-          // Eliminar el ítem de la lista local
           this.inventory = this.inventory.filter(item => item.id !== id);
         },
         (error) => {

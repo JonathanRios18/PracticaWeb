@@ -21,18 +21,24 @@ export class LoginComponent {
 
   onLogin(): void {
     const credentials = { email: this.email, password: this.password };
-
+  
     this.authService.login(credentials).subscribe(
       (response) => {
-        const token = response.token; // Asegúrate de que el backend devuelve el token en esta propiedad
-        this.authService.saveToken(token);
-        this.errorMessage = '';
-        this.router.navigate(['/dashboard']); // Redirige tras login exitoso
+        const token = response.token;
+        console.log('Token recibido:', token); // Debugging
+        if (token) {
+          this.authService.saveToken(token);
+          console.log('Token guardado:', this.authService.getToken()); // Verificar almacenamiento
+          this.errorMessage = '';
+          this.router.navigate(['/dashboard']);
+        } else {
+          console.error('No se recibió un token válido.');
+        }
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);
         this.errorMessage = 'Las credenciales son incorrectas. Por favor, inténtalo de nuevo.';
       }
     );
-  }
+  }  
 }

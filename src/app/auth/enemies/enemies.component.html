@@ -14,7 +14,7 @@
         <th>Descripción</th>
         <th>Tipo</th>
         <th>Nivel de Fuerza</th>
-        <th>Acciones</th>
+        <th *ngIf="userRole === 'admin'">Acciones</th> <!-- Mostrar solo si es admin -->
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         <td>{{ enemy.description }}</td>
         <td>{{ enemy.type }}</td>
         <td>{{ enemy.strength_level }}</td>
-        <td>
+        <td *ngIf="userRole === 'admin'">
           <button (click)="deleteEnemy(enemy.id)" class="btn-delete">Eliminar</button>
         </td>
       </tr>

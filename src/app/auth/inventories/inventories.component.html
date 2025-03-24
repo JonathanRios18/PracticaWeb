@@ -12,7 +12,7 @@
         <th>Nombre del Ítem</th>
         <th>Cantidad</th>
         <th>Personaje</th>
-        <th>Acciones</th>
+        <th *ngIf="userRole === 'admin'">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@
         <td>{{ item.item_name }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.character }}</td>
-        <td>
+        <td *ngIf="userRole === 'admin'">
           <button (click)="deleteInventoryItem(item.id)" class="btn-delete">Eliminar</button>
         </td>
 

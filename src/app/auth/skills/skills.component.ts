@@ -4,6 +4,8 @@ import { CharacterService, Character } from '../../services/character.service';
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { jwtDecode }from 'jwt-decode';
 
 @Component({
   selector: 'app-skills',
@@ -17,20 +19,34 @@ export class SkillsComponent implements OnInit {
   characters: Character[] = []; // Lista de personajes
   newSkill: SkillForm = { id: 0, skill_name: '', type: '', character_id: 0 }; // Modelo para el formulario
   showModal: boolean = false;
+  userRole: string | null = null; // Variable para almacenar el rol del usuario
 
   private pollingInterval: any;
 
-  constructor(private skillService: SkillService, private characterService: CharacterService) {}
+  constructor(private skillService: SkillService, private characterService: CharacterService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadSkills();
     this.loadCharacters();
     this.startPolling();
+    this.getUserRole(); // Obtener el rol del usuario al iniciar
   }
 
   ngOnDestroy(): void {
     if (this.pollingInterval) {
       clearInterval(this.pollingInterval);  // Detener polling cuando el componente se destruya
+    }
+  }
+
+  getUserRole(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        this.userRole = decodedToken?.role || null;
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+      }
     }
   }
 

@@ -6,6 +6,8 @@ import { NationService, Nation } from '../../services/nation.service';
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { jwtDecode }from 'jwt-decode';
 
 @Component({
   selector: 'app-quests',
@@ -15,6 +17,7 @@ import { FormsModule } from '@angular/forms';
   imports: [AdminNavbarComponent, CommonModule, FormsModule],
 })
 export class QuestsComponent implements OnInit {
+  userRole: string | null = null; // Variable para almacenar el rol del usuario
   quests: QuestDisplay[] = []; // Para mostrar en la tabla
   newQuest: QuestForm = {
     id: 0,
@@ -34,7 +37,8 @@ export class QuestsComponent implements OnInit {
     private questService: QuestService,
     private characterService: CharacterService,
     private enemyService: EnemyService,
-    private nationService: NationService
+    private nationService: NationService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +46,19 @@ export class QuestsComponent implements OnInit {
     this.loadCharacters();
     this.loadEnemies();
     this.loadNations();
+    this.getUserRole(); // Obtener el rol del usuario al iniciar
+  }
+
+  getUserRole(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        this.userRole = decodedToken?.role || null;
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+      }
+    }
   }
 
   loadQuests(): void {
