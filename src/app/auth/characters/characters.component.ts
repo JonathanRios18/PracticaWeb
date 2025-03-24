@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CharacterService, Character } from '../../services/character.service';
-import { AuthService } from '../../services/auth.service';  // Importar AuthService
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { FormsModule } from '@angular/forms';
@@ -12,20 +12,29 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [AdminNavbarComponent, CommonModule, FormsModule]
 })
-export class CharactersComponent implements OnInit {
+export class CharactersComponent implements OnInit, OnDestroy {
   characters: Character[] = [];
   selectedCharacter: Character | null = null;
-  showModal: boolean = false; 
+  showModal: boolean = false;
   newCharacter: Character = {
     name: '',
     level: 1,
     health: 100
   };
 
+  private pollingInterval: any;
+
   constructor(private characterService: CharacterService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadCharacters();
+    this.startPolling();  // Iniciar polling al cargar el componente
+  }
+
+  ngOnDestroy(): void {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);  // Detener polling cuando el componente se destruya
+    }
   }
 
   loadCharacters(): void {
@@ -37,6 +46,12 @@ export class CharactersComponent implements OnInit {
         console.error('Error al cargar los personajes:', error);
       }
     );
+  }
+
+  startPolling(): void {
+    this.pollingInterval = setInterval(() => {
+      this.loadCharacters();
+    }, 8000);
   }
 
   openModal(): void {
@@ -52,7 +67,6 @@ export class CharactersComponent implements OnInit {
       (response) => {
         this.characters.push(response);
         this.closeModal();
-        this.loadCharacters();
       },
       (error) => {
         console.error('Error al agregar personaje:', error);
@@ -60,7 +74,6 @@ export class CharactersComponent implements OnInit {
     );
   }
 
-  // Función para eliminar un personaje
   deleteCharacter(id: number): void {
     if (confirm('¿Estás seguro de que quieres eliminar este personaje?')) {
       this.characterService.deleteCharacter(id).subscribe(

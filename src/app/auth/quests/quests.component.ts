@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { QuestService, QuestDisplay, QuestForm } from '../../services/quest.service';
 import { CharacterService, Character } from '../../services/character.service';
 import { EnemyService, Enemy } from '../../services/enemy.service';
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [AdminNavbarComponent, CommonModule, FormsModule],
 })
-export class QuestsComponent implements OnInit {
+export class QuestsComponent implements OnInit, OnDestroy {
   quests: QuestDisplay[] = []; // Para mostrar en la tabla
   newQuest: QuestForm = {
     id: 0,
@@ -30,6 +30,8 @@ export class QuestsComponent implements OnInit {
   nations: Nation[] = []; // Lista de naciones
   showModal: boolean = false; // Controla la apertura del modal
 
+  private pollingInterval: any; // Para almacenar el intervalo de polling
+
   constructor(
     private questService: QuestService,
     private characterService: CharacterService,
@@ -42,6 +44,13 @@ export class QuestsComponent implements OnInit {
     this.loadCharacters();
     this.loadEnemies();
     this.loadNations();
+    this.startPolling();  // Iniciar el polling
+  }
+
+  ngOnDestroy(): void {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);  // Detener el polling cuando el componente se destruya
+    }
   }
 
   loadQuests(): void {
@@ -88,6 +97,15 @@ export class QuestsComponent implements OnInit {
     );
   }
 
+  startPolling(): void {
+    this.pollingInterval = setInterval(() => {
+      this.loadQuests();
+      this.loadCharacters();
+      this.loadEnemies();
+      this.loadNations();
+    }, 10000);
+  }
+
   openModal(): void {
     this.showModal = true;
   }
@@ -126,14 +144,13 @@ export class QuestsComponent implements OnInit {
             title: response.title,
             description: response.description,
             dificulty_level: response.dificulty_level,
-            character: this.characters.find(c => c.id === response.character_id)?.name || 'Unknown',
-            enemy: this.enemies.find(e => e.id === response.enemy_id)?.name || 'Unknown',
-            nation: this.nations.find(n => n.id === response.nation_id)?.name || 'Unknown',
+            character: this.characters.find(c => c.id === response.character_id)?.name || '',
+            enemy: this.enemies.find(e => e.id === response.enemy_id)?.name || '',
+            nation: this.nations.find(n => n.id === response.nation_id)?.name || '',
           };
 
           this.quests.push(questDisplay); // Añadir a la lista
           this.closeModal();
-          this.loadQuests(); // Recargar la lista de quests
         },
         (error) => {
           console.error('Error al agregar la misión:', error);
@@ -144,16 +161,16 @@ export class QuestsComponent implements OnInit {
     }
   }
 
-  // Método para eliminar una nación
+  // Método para eliminar una misión
   deleteQuest(id: number): void {
-    if (confirm('¿Estás seguro de que deseas eliminar esta nación?')) {
+    if (confirm('¿Estás seguro de que deseas eliminar esta misión?')) {
       this.questService.deleteQuest(id).subscribe(
         () => {
-          // Eliminar la nación de la lista local
+          // Eliminar la misión de la lista local
           this.quests = this.quests.filter(quest => quest.id !== id);
         },
         (error) => {
-          console.error('Error al eliminar la nación:', error);
+          console.error('Error al eliminar la misión:', error);
         }
       );
     }
