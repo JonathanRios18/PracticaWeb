@@ -143,4 +143,19 @@ export class QuestsComponent implements OnInit {
       alert('Por favor, completa todos los campos.');
     }
   }
+
+  // Método para eliminar una nación
+  deleteQuest(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar esta nación?')) {
+      this.questService.deleteQuest(id).subscribe(
+        () => {
+          // Eliminar la nación de la lista local
+          this.quests = this.quests.filter(quest => quest.id !== id);
+        },
+        (error) => {
+          console.error('Error al eliminar la nación:', error);
+        }
+      );
+    }
+  }
 }

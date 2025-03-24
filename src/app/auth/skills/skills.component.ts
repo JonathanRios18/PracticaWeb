@@ -81,4 +81,19 @@ export class SkillsComponent implements OnInit {
       alert('Por favor, completa todos los campos.');
     }
   }
+
+  // Método para eliminar una habilidad
+  deleteSkill(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar esta habilidad?')) {
+      this.skillService.deleteSkill(id).subscribe(
+        () => {
+          // Eliminar la habilidad de la lista local
+          this.skills = this.skills.filter(skill => skill.id !== id);
+        },
+        (error) => {
+          console.error('Error deleting skill:', error);
+        }
+      );
+    }
+  }
 }

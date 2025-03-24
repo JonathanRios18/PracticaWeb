@@ -23,7 +23,7 @@
         <td>{{ character.level }}</td>
         <td>{{ character.health }}</td>
         <td>
-          <button *ngIf="character.id" (click)="deleteCharacter(character.id)">Eliminar</button>
+          <button *ngIf="character.id" (click)="deleteCharacter(character.id)" class="btn-delete">Eliminar</button>
         </td>
       </tr>      
     </tbody>

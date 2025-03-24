@@ -8,14 +8,14 @@ export interface SkillDisplay {
   id: number;
   skill_name: string;
   type: string;
-  character: string; // Nombre del personaje
+  character: string;
 }
 
 export interface SkillForm {
   id: number;
   skill_name: string;
   type: string;
-  character_id: number; // ID del personaje
+  character_id: number;
 }
 
 @Injectable({
@@ -36,5 +36,9 @@ export class SkillService {
 
   addSkill(skill: SkillForm): Observable<SkillForm> {
     return this.http.post<SkillForm>(this.apiUrl, skill);
+  }
+
+  deleteSkill(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

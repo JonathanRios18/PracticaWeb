@@ -73,4 +73,19 @@ export class EnemiesComponent implements OnInit {
       strength_level: 0
     };
   }
+
+  // Método para eliminar un enemigo
+  deleteEnemy(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este enemigo?')) {
+      this.enemyService.deleteEnemy(id).subscribe(
+        () => {
+          // Eliminar el enemigo de la lista local
+          this.enemies = this.enemies.filter(enemy => enemy.id !== id);
+        },
+        (error) => {
+          console.error('Error al eliminar el enemigo:', error);
+        }
+      );
+    }
+  }
 }

@@ -70,4 +70,19 @@ export class NationsComponent implements OnInit {
       history: ''
     };
   }
+
+  // Método para eliminar una nación
+  deleteNation(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar esta nación?')) {
+      this.nationService.deleteNation(id).subscribe(
+        () => {
+          // Eliminar la nación de la lista local
+          this.nations = this.nations.filter(nation => nation.id !== id);
+        },
+        (error) => {
+          console.error('Error al eliminar la nación:', error);
+        }
+      );
+    }
+  }
 }

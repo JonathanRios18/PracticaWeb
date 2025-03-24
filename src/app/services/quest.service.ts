@@ -41,4 +41,8 @@ export class QuestService {
   addQuest(quest: QuestForm): Observable<QuestForm> {
     return this.http.post<QuestForm>(this.apiUrl, quest);
   }
+
+  deleteQuest(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -82,4 +82,19 @@ export class InventoriesComponent implements OnInit {
       alert('Por favor, complete todos los campos.');
     }
   }
+
+  // Método para eliminar un ítem de inventario
+  deleteInventoryItem(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este ítem del inventario?')) {
+      this.inventoryService.deleteInventory(id).subscribe(
+        () => {
+          // Eliminar el ítem de la lista local
+          this.inventory = this.inventory.filter(item => item.id !== id);
+        },
+        (error) => {
+          console.error('Error al eliminar el ítem de inventario:', error);
+        }
+      );
+    }
+  }
 }

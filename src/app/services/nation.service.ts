@@ -28,4 +28,8 @@ export class NationService {
   addNation(nation: Nation): Observable<Nation> {
     return this.http.post<Nation>(this.apiUrl, nation);
   }
+
+  deleteNation(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

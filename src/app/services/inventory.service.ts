@@ -7,7 +7,7 @@ export interface InventoryDisplay {
   id: number;
   item_name: string;
   quantity: number;
-  character: string; // Nombre del personaje
+  character: string;
 }
 
 // Interfaz para envío al backend
@@ -15,7 +15,7 @@ export interface InventoryForm {
   id: number;
   item_name: string;
   quantity: number;
-  character_id: number; // ID del personaje
+  character_id: number;
 }
 
 @Injectable({
@@ -32,5 +32,9 @@ export class InventoryService {
 
   addInventory(item: InventoryForm): Observable<InventoryForm> {
     return this.http.post<InventoryForm>(this.apiUrl, item);
+  }
+
+  deleteInventory(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

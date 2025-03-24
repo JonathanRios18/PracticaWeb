@@ -12,6 +12,7 @@
         <th>Nombre</th>
         <th>Tipo</th>
         <th>Personaje</th>
+        <th>Acciones</th>  <!-- New column for actions -->
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,9 @@
         <td>{{ skill.skill_name }}</td>
         <td>{{ skill.type }}</td>
         <td>{{ skill.character }}</td>
+        <td>
+          <button (click)="deleteSkill(skill.id)" class="btn-delete">Eliminar</button>  <!-- Delete button -->
+        </td>
       </tr>
     </tbody>
   </table>

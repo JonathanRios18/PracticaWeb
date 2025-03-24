@@ -29,4 +29,8 @@ export class EnemyService {
   addEnemy(enemy: Enemy): Observable<Enemy> {
     return this.http.post<Enemy>(this.apiUrl, enemy);
   }
+
+  deleteEnemy(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

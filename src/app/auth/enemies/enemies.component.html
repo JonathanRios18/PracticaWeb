@@ -14,6 +14,7 @@
         <th>Descripción</th>
         <th>Tipo</th>
         <th>Nivel de Fuerza</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +24,9 @@
         <td>{{ enemy.description }}</td>
         <td>{{ enemy.type }}</td>
         <td>{{ enemy.strength_level }}</td>
+        <td>
+          <button (click)="deleteEnemy(enemy.id)" class="btn-delete">Eliminar</button>
+        </td>
       </tr>
     </tbody>
   </table>

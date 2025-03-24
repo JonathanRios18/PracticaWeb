@@ -13,6 +13,7 @@
         <th>Nombre</th>
         <th>Clima</th>
         <th>Historia</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +22,11 @@
         <td>{{ nation.name }}</td>
         <td>{{ nation.climate }}</td>
         <td>{{ nation.history }}</td>
+        <td>
+          <button (click)="deleteNation(nation.id)" class="btn-delete">Eliminar</button>
+        </td>
       </tr>
+
     </tbody>
   </table>
 </div>
