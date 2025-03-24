@@ -3,7 +3,7 @@
 <div class="table-container">
   <div class="table-header">
     <h2 class="table-title">Lista de Personajes</h2>
-    <button class="btn-add">Agregar</button>
+    <button class="btn-add" (click)="openModal()">Agregar</button>
   </div>
 
   <table>
@@ -24,4 +24,26 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal para agregar personaje -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Nuevo Personaje</h2>
+    <form (ngSubmit)="addCharacter()">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" [(ngModel)]="newCharacter.name" name="name" required>
+
+      <label for="level">Nivel:</label>
+      <input type="number" id="level" [(ngModel)]="newCharacter.level" name="level" min="1" required>
+
+      <label for="health">Salud:</label>
+      <input type="number" id="health" [(ngModel)]="newCharacter.health" name="health" min="1" required>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-add">Guardar</button>
+        <button type="button" class="btn-close" (click)="closeModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
 </div>

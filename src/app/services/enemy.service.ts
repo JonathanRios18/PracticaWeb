@@ -25,4 +25,8 @@ export class EnemyService {
   getEnemy(id: number): Observable<Enemy> {
     return this.http.get<Enemy>(`${this.apiUrl}/${id}`);
   }
+
+  addEnemy(enemy: Enemy): Observable<Enemy> {
+    return this.http.post<Enemy>(this.apiUrl, enemy);
+  }
 }

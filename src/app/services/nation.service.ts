@@ -24,4 +24,8 @@ export class NationService {
   getNation(id: number): Observable<Nation> {
     return this.http.get<Nation>(`${this.apiUrl}/${id}`);
   }
+
+  addNation(nation: Nation): Observable<Nation> {
+    return this.http.post<Nation>(this.apiUrl, nation);
+  }
 }

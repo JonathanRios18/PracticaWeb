@@ -2,9 +2,10 @@
 
 <div class="table-container">
   <div class="table-header">
-    <h2 class="table-title">Lista de Personajes</h2>
-    <button class="btn-add">Agregar</button>
+    <h2 class="table-title">Lista de Naciones</h2>
+    <button class="btn-add" (click)="openModal()">Agregar</button>
   </div>
+
   <table>
     <thead>
       <tr>
@@ -23,4 +24,31 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal -->
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <h2 class="modal-title">Agregar Nación</h2>
+    <form (submit)="addNation()">
+      <label for="name">Nombre</label>
+      <input id="name" [(ngModel)]="newNation.name" name="name" required />
+
+      <label for="climate">Clima</label>
+      <input id="climate" [(ngModel)]="newNation.climate" name="climate" required />
+
+      <label for="history">Historia</label>
+      <textarea
+        id="history"
+        [(ngModel)]="newNation.history"
+        name="history"
+        required
+      ></textarea>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-add">Guardar</button>
+        <button type="button" class="btn-close" (click)="closeModal()">Cerrar</button>
+      </div>
+    </form>
+  </div>
 </div>

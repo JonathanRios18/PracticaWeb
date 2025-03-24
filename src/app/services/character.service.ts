@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Character {
-  id: number;
+  id?: number;
   name: string;
   level: number;
   health: number;
@@ -24,5 +24,8 @@ export class CharacterService {
   getCharacter(id: number): Observable<Character> {
     return this.http.get<Character>(`${this.apiUrl}/${id}`);
   }
-}
 
+  createCharacter(character: Character): Observable<Character> {
+    return this.http.post<Character>(this.apiUrl, character);
+  }
+}
