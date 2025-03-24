@@ -18,6 +18,8 @@ export class InventoriesComponent implements OnInit {
   newInventoryItem: InventoryForm = { id: 0, item_name: '', quantity: 0, character_id: 0 }; // Modelo para formulario
   showModal: boolean = false;
 
+  private pollingInterval: any;
+
   constructor(
     private inventoryService: InventoryService,
     private characterService: CharacterService
@@ -26,6 +28,13 @@ export class InventoriesComponent implements OnInit {
   ngOnInit(): void {
     this.loadInventory();
     this.loadCharacters();
+    this.startPolling();
+  }
+
+  ngOnDestroy(): void {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);  // Detener polling cuando el componente se destruya
+    }
   }
 
   loadInventory(): void {
@@ -50,6 +59,13 @@ export class InventoriesComponent implements OnInit {
     );
   }
 
+  startPolling(): void {
+    this.pollingInterval = setInterval(() => {
+      this.loadInventory();
+      this.loadCharacters();
+    }, 8000);
+  }
+
   openModal(): void {
     this.showModal = true;
   }
@@ -67,12 +83,11 @@ export class InventoriesComponent implements OnInit {
             id: response.id,
             item_name: response.item_name,
             quantity: response.quantity,
-            character: this.characters.find(c => c.id === response.character_id)?.name || 'Unknown',
+            character: this.characters.find(c => c.id === response.character_id)?.name || '',
           };
 
           this.inventory.push(inventoryDisplay);
           this.closeModal();
-          this.loadInventory();
         },
         (error) => {
           console.error('Error al agregar el inventario:', error);

@@ -18,11 +18,20 @@ export class SkillsComponent implements OnInit {
   newSkill: SkillForm = { id: 0, skill_name: '', type: '', character_id: 0 }; // Modelo para el formulario
   showModal: boolean = false;
 
+  private pollingInterval: any;
+
   constructor(private skillService: SkillService, private characterService: CharacterService) {}
 
   ngOnInit(): void {
     this.loadSkills();
-    this.loadCharacters(); // Cargar personajes para el combobox
+    this.loadCharacters();
+    this.startPolling();
+  }
+
+  ngOnDestroy(): void {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);  // Detener polling cuando el componente se destruya
+    }
   }
 
   loadSkills(): void {
@@ -47,13 +56,19 @@ export class SkillsComponent implements OnInit {
     );
   }
 
+  startPolling(): void {
+    this.pollingInterval = setInterval(() => {
+      this.loadSkills();
+      this.loadCharacters();
+    }, 8000);
+  }
+
   openModal(): void {
     this.showModal = true;
   }
 
   closeModal(): void {
     this.showModal = false;
-    // Reiniciar el modelo del formulario
     this.newSkill = { id: 0, skill_name: '', type: '', character_id: 0 };
   }
 
@@ -66,12 +81,11 @@ export class SkillsComponent implements OnInit {
             id: response.id,
             skill_name: response.skill_name,
             type: response.type,
-            character: this.characters.find(c => c.id === response.character_id)?.name || 'Unknown'
+            character: this.characters.find(c => c.id === response.character_id)?.name || ''
           };
 
           this.skills.push(skillDisplay); // Añadir a la lista
           this.closeModal(); // Cerrar el modal
-          this.loadSkills(); // Recargar lista de habilidades
         },
         (error) => {
           console.error('Error adding skill:', error);
