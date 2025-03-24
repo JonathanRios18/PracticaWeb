@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService, Character } from '../../services/character.service';
+import { AuthService } from '../../services/auth.service';  // Importar AuthService
 import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../components/admin-navbar/admin-navbar.component';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +22,7 @@ export class CharactersComponent implements OnInit {
     health: 100
   };
 
-  constructor(private characterService: CharacterService) {}
+  constructor(private characterService: CharacterService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadCharacters();
@@ -51,10 +52,26 @@ export class CharactersComponent implements OnInit {
       (response) => {
         this.characters.push(response);
         this.closeModal();
-        this.loadCharacters();},
+        this.loadCharacters();
+      },
       (error) => {
         console.error('Error al agregar personaje:', error);
       }
     );
+  }
+
+  // Función para eliminar un personaje
+  deleteCharacter(id: number): void {
+    if (confirm('¿Estás seguro de que quieres eliminar este personaje?')) {
+      this.characterService.deleteCharacter(id).subscribe(
+        () => {
+          this.characters = this.characters.filter(character => character.id !== id);
+          alert('Personaje eliminado correctamente.');
+        },
+        (error) => {
+          console.error('Error al eliminar el personaje:', error);
+        }
+      );
+    }
   }
 }

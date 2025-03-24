@@ -13,6 +13,7 @@
         <th>Nombre</th>
         <th>Nivel</th>
         <th>Salud</th>
+        <th>Acciones</th> <!-- Nueva columna -->
       </tr>
     </thead>
     <tbody>
@@ -21,7 +22,10 @@
         <td>{{ character.name }}</td>
         <td>{{ character.level }}</td>
         <td>{{ character.health }}</td>
-      </tr>
+        <td>
+          <button *ngIf="character.id" (click)="deleteCharacter(character.id)">Eliminar</button>
+        </td>
+      </tr>      
     </tbody>
   </table>
 </div>

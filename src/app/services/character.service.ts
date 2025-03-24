@@ -28,4 +28,9 @@ export class CharacterService {
   createCharacter(character: Character): Observable<Character> {
     return this.http.post<Character>(this.apiUrl, character);
   }
+
+  // Método para eliminar un personaje
+  deleteCharacter(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

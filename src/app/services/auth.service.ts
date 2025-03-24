@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { jwtDecode } from 'jwt-decode'; // Usar importación predeterminada de jwt-decode
+import { jwtDecode } from 'jwt-decode'; // Usar jwt-decode para decodificar el token
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // Método para loguearse
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
+  // Método para logout
   logout(): Observable<any> {
     const token = this.getToken();
     if (token) {
@@ -27,18 +29,22 @@ export class AuthService {
     return new Observable();
   }
 
+  // Guardar token en localStorage
   saveToken(token: string): void {
-    localStorage.setItem('token', token);
+    localStorage.setItem('auth_token', token); // Guardar token en localStorage
   }
 
+  // Eliminar token de localStorage
   removeToken(): void {
-    localStorage.removeItem('token'); // Método para eliminar el token
+    localStorage.removeItem('auth_token');
   }
 
+  // Obtener token de localStorage
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('auth_token');
   }
 
+  // Verificar si el usuario está autenticado
   isAuthenticated(): boolean {
     const token = this.getToken();
     if (token) {
@@ -46,24 +52,5 @@ export class AuthService {
       return decodedToken.exp > Date.now() / 1000; // Verificar si el token no ha expirado
     }
     return false;
-  }
-
-  getUserRole(): string | null {
-    const token = this.getToken();
-    if (token) {
-      const decodedToken: any = jwtDecode(token);
-      return decodedToken.role; // Retornar el rol del usuario desde el token decodificado
-    }
-    return null;
-  }
-
-  isAdmin(): boolean {
-    const role = this.getUserRole();
-    return role === 'admin'; // Verificar si el rol es 'admin'
-  }
-
-  isUser(): boolean {
-    const role = this.getUserRole();
-    return role === 'user'; // Verificar si el rol es 'user'
   }
 }
