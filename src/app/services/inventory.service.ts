@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 // Interfaz para visualización
 export interface InventoryDisplay {
@@ -22,12 +23,16 @@ export interface InventoryForm {
   providedIn: 'root',
 })
 export class InventoryService {
-  private apiUrl = 'http://192.168.252.226:8000/api/inventories';
+  private apiUrl = `${environment.apiUrl}/inventories`;
 
   constructor(private http: HttpClient) {}
 
   getInventory(): Observable<InventoryDisplay[]> {
     return this.http.get<InventoryDisplay[]>(this.apiUrl);
+  }
+
+  getInventoryItem(id: number): Observable<InventoryDisplay> {
+    return this.http.get<InventoryDisplay>(`${this.apiUrl}/${id}`);
   }
 
   addInventory(item: InventoryForm): Observable<InventoryForm> {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Character {
   id?: number;
@@ -13,7 +14,7 @@ export interface Character {
   providedIn: 'root'
 })
 export class CharacterService {
-  private apiUrl = 'http://192.168.252.226:8000/api/characters';
+  private apiUrl = `${environment.apiUrl}/characters`;
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +30,6 @@ export class CharacterService {
     return this.http.post<Character>(this.apiUrl, character);
   }
 
-  // Método para eliminar un personaje
   deleteCharacter(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

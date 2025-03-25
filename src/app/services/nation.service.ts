@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Nation {
   id: number;
@@ -13,7 +14,8 @@ export interface Nation {
   providedIn: 'root'
 })
 export class NationService {
-  private apiUrl = 'http://192.168.252.226:8000/api/nations';
+  private apiUrl = `${environment.apiUrl}/nations`;
+  
   constructor(private http: HttpClient) {}
 
   getNations(): Observable<Nation[]> {

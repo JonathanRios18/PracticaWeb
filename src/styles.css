@@ -35,12 +35,12 @@ main {
 
 /* Styling for the Description Text */
 .description {
-    font-size: 1.5rem; /* Más pequeño que el texto de bienvenida */
-    font-family: 'Georgia', serif; /* Similar, pero con un toque clásico */
-    color: #e5c59c; /* Color cálido que combina con la paleta */
-    text-align: center; /* Centrado como el resto del contenido */
-    margin: 1.5rem 2rem; /* Separación adecuada */
-    line-height: 1.8; /* Para mejorar la legibilidad */
+    font-size: 1.5rem;
+    font-family: 'Georgia', serif;
+    color: #e5c59c;
+    text-align: center;
+    margin: 1.5rem 2rem;
+    line-height: 1.8;
     text-shadow: 1px 1px 5px #000;
 }
 

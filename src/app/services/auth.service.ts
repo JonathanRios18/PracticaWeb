@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://192.168.252.226:8000/api';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -44,6 +45,7 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
+  // Verificar si está autenticado
   isAuthenticated(): boolean {
     const token = this.getToken();
     if (token) {
@@ -54,6 +56,7 @@ export class AuthService {
     return false;
   }  
 
+  // Decodificar token
   decodeToken(token: string): any {
     try {
       return jwtDecode(token);

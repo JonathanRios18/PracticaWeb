@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-// Función de interceptor usando la firma correcta de HttpInterceptorFn
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);  // Usar inject() para acceder a AuthService
   const router = inject(Router);  // Usar inject() para acceder a Router

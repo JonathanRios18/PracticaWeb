@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Enemy {
   id: number;
@@ -14,7 +15,7 @@ export interface Enemy {
   providedIn: 'root'
 })
 export class EnemyService {
-  private apiUrl = 'http://192.168.252.226:8000/api/enemies';
+  private apiUrl = `${environment.apiUrl}/enemies`;
 
   constructor(private http: HttpClient) {}
 

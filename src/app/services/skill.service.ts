@@ -1,8 +1,9 @@
-// skill.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
+// Interfaz para visualización
 export interface SkillDisplay {
   id: number;
   skill_name: string;
@@ -10,6 +11,7 @@ export interface SkillDisplay {
   character: string;
 }
 
+// Interfaz para envío al backend
 export interface SkillForm {
   id: number;
   skill_name: string;
@@ -21,7 +23,7 @@ export interface SkillForm {
   providedIn: 'root',
 })
 export class SkillService {
-  private apiUrl = 'http://192.168.252.226:8000/api/skills';
+  private apiUrl = `${environment.apiUrl}/skills`;
 
   constructor(private http: HttpClient) {}
 
